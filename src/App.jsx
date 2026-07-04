@@ -329,25 +329,23 @@ export default function App() {
   const [saveState, setSaveState] = useState("idle"); // idle | saving | saved
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await window.storage.get(STORAGE_KEY, false);
-        if (res && res.value) {
-          setVendors(JSON.parse(res.value));
-        }
-      } catch (e) {
-        // key doesn't exist yet — that's fine
-      } finally {
-        setLoaded(true);
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        setVendors(JSON.parse(raw));
       }
-    })();
+    } catch (e) {
+      // corrupted or missing data — start fresh
+    } finally {
+      setLoaded(true);
+    }
   }, []);
 
-  const persist = async (next) => {
+  const persist = (next) => {
     setVendors(next);
     setSaveState("saving");
     try {
-      await window.storage.set(STORAGE_KEY, JSON.stringify(next), false);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       setSaveState("saved");
       setTimeout(() => setSaveState("idle"), 1200);
     } catch (e) {
@@ -521,4 +519,6 @@ function ListView({ vendors, onOpen, onNew, onDelete }) {
                   onClick={() => onOpen(v.id)}
                   style={{
                     display: "flex",
-                    justifyContent: "space-be
+                    justifyContent: "space-between",
+                    padding: "10px 14px",
+                    borderTop: i === 0 ? "
