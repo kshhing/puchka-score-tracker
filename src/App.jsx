@@ -132,7 +132,7 @@ const STORAGE_KEY = "puchka-vendors-v1";
 
 function emptyVendor() {
   return {
-    id: `v_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+    id: "v_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8),
     vendorName: "",
     location: "",
     date: "",
@@ -179,7 +179,7 @@ function ScoreButtons({ value, onChange, label }) {
               minWidth: 40,
               height: 36,
               borderRadius: 9,
-              border: `1.5px solid ${active ? COLORS.maroon : COLORS.line}`,
+              border: "1.5px solid " + (active ? COLORS.maroon : COLORS.line),
               background: active ? COLORS.maroon : "#fff",
               color: active ? "#fff" : COLORS.ink,
               fontWeight: 700,
@@ -201,7 +201,7 @@ function ItemCard({ item, data, onUpdate }) {
   const r2 = data?.r2;
   const notes = data?.notes || "";
   return (
-    <div style={{ border: `1px solid ${COLORS.line}`, borderRadius: 12, padding: 12, marginBottom: 10, background: "#fff" }}>
+    <div style={{ border: "1px solid " + COLORS.line, borderRadius: 12, padding: 12, marginBottom: 10, background: "#fff" }}>
       <div style={{ fontWeight: 700, fontSize: 14.5, color: COLORS.ink, marginBottom: 2 }}>{item.title}</div>
       {item.check && (
         <div style={{ fontSize: 12, color: COLORS.inkMuted, marginBottom: 6 }}>{item.check}</div>
@@ -228,7 +228,7 @@ function ItemCard({ item, data, onUpdate }) {
           fontSize: 13,
           padding: 8,
           borderRadius: 8,
-          border: `1px solid ${COLORS.line}`,
+          border: "1px solid " + COLORS.line,
           resize: "vertical",
           fontFamily: "inherit",
           boxSizing: "border-box",
@@ -287,7 +287,7 @@ function TextField({ label, value, onChange, placeholder }) {
           width: "100%",
           padding: "9px 10px",
           borderRadius: 8,
-          border: `1px solid ${COLORS.line}`,
+          border: "1px solid " + COLORS.line,
           fontSize: 14,
           boxSizing: "border-box",
           fontFamily: "inherit",
@@ -310,7 +310,7 @@ function TextArea({ label, value, onChange, placeholder }) {
           minHeight: 54,
           padding: "9px 10px",
           borderRadius: 8,
-          border: `1px solid ${COLORS.line}`,
+          border: "1px solid " + COLORS.line,
           fontSize: 14,
           boxSizing: "border-box",
           fontFamily: "inherit",
@@ -467,7 +467,7 @@ function ListView({ vendors, onOpen, onNew, onDelete }) {
             key={v.id}
             style={{
               background: "#fff",
-              border: `1px solid ${COLORS.line}`,
+              border: "1px solid " + COLORS.line,
               borderRadius: 12,
               padding: 14,
               marginBottom: 10,
@@ -486,7 +486,7 @@ function ListView({ vendors, onOpen, onNew, onDelete }) {
                 </div>
               </div>
               <button
-                onClick={(e) => { e.stopPropagation(); if (confirm(`Delete "${v.vendorName || "this vendor"}"?`)) onDelete(v.id); }}
+                onClick={(e) => { e.stopPropagation(); if (confirm('Delete "' + (v.vendorName || "this vendor") + '"?')) onDelete(v.id); }}
                 style={{ border: "none", background: "none", color: "#B33", cursor: "pointer", padding: 4 }}
               >
                 <Trash2 size={16} />
@@ -509,7 +509,7 @@ function ListView({ vendors, onOpen, onNew, onDelete }) {
           <div style={{ fontSize: 12.5, fontWeight: 800, color: COLORS.inkMuted, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.4 }}>
             Comparison
           </div>
-          <div style={{ background: "#fff", border: `1px solid ${COLORS.line}`, borderRadius: 12, overflow: "hidden" }}>
+          <div style={{ background: "#fff", border: "1px solid " + COLORS.line, borderRadius: 12, overflow: "hidden" }}>
             {vendors
               .map((v) => ({ v, prod: scoreTotal(v, PRODUCT_CATEGORIES).sum }))
               .sort((a, b) => b.prod - a.prod)
@@ -521,4 +521,4 @@ function ListView({ vendors, onOpen, onNew, onDelete }) {
                     display: "flex",
                     justifyContent: "space-between",
                     padding: "10px 14px",
-                    borderTop: i === 0 ? "
+                    borderTo
